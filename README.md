@@ -51,7 +51,7 @@ Con estos costos, frena cuando P supera cerca de 0,31 (0,312 con monto 50; 0,301
 **Cómo se corre en vivo.** Hay tres caminos con el mismo resultado:
 
 - **Colab:** [abrir agente_M03.ipynb](https://colab.research.google.com/github/ramirobales-collab/hackaton-iia-uade-2026/blob/main/agente_M03.ipynb), cargar los tres valores en la celda y ejecutar todo.
-- **Python:** `python agente_M03.py <monto> <antigüedad> <distancia>`. Para reproducir la medición: `python agente_M03.py --medir`.
+- **Python:** `python agente_M03.py 500 30 900` (monto, antigüedad y distancia, en ese orden). Para reproducir la medición: `python agente_M03.py --medir`.
 - **A mano:** las fórmulas de arriba con una calculadora.
 
 **Dos casos de ejemplo.**
@@ -89,7 +89,7 @@ VP: 15, 17, 20. FN: 18. VN: 16, 19. Cierre: 3 + 1 + 0 + 2 = 6, y VP + FN = 4, lo
 | Especificidad | 6/8 = 75 % | 2/2 = 100 % |
 | **Costo (USD)** | **584** | **177** |
 
-**Entrenamiento contra prueba.** La prueba sale apenas mejor en exactitud (+4,7 puntos) y peor en sensibilidad (−8,3 puntos). No hay señal de sobreajuste, pero tampoco alcanza para afirmar que generaliza: con 6 casos, un solo caso mueve la exactitud 16,7 puntos, y la especificidad de 100 % sale de solo 2 pedidos legítimos. Además, la prueba tiene 67 % de fraude y el entrenamiento 43 %. La estimación más prudente es la de LOO sobre 1–14, con exactitud 10/14 = 71,4 %, unos 7 puntos debajo de la medición sobre los mismos datos con los que se ajustó.
+**Entrenamiento contra prueba.** La prueba sale apenas mejor en exactitud (+4,7 puntos) y peor en sensibilidad (−8,3 puntos). No hay señal de sobreajuste, pero tampoco alcanza para afirmar que generaliza: con 6 casos, un solo caso mueve la exactitud 16,7 puntos, y la especificidad de 100 % sale de solo 2 pedidos legítimos. Además, la prueba tiene 67 % de fraude y el entrenamiento 43 %. Si un solo caso de prueba cambiara de lado, la exactitud quedaría entre 66,7 % y 100 %, y la sensibilidad se movería 25 puntos, porque hay solo 4 fraudes. El intervalo de Wilson al 95 % para la exactitud de prueba va de 44 % a 97 %, así que el 83,3 % no es un número firme. La estimación más prudente es la de LOO sobre 1–14, con exactitud 10/14 = 71,4 %, unos 7 puntos debajo de la medición sobre los mismos datos con los que se ajustó.
 
 **Qué tan ciega fue la prueba.** No fue del todo ciega. La ficha trae los 20 casos en una misma tabla y la IA leyó también las filas 15–20 antes de construir el agente. Los scripts que ajustaron pesos y compararon candidatos usaron solo 1–14, y después de medir la prueba no se cambió ningún parámetro. Pero eso no descarta una influencia por haberlas visto, y el commit de los parámetros quedó registrado después de la primera medición, así que el historial tampoco prueba el orden.
 
