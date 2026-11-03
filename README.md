@@ -91,7 +91,9 @@ VP: 15, 17, 20. FN: 18. VN: 16, 19. Cierre: 3 + 1 + 0 + 2 = 6, y VP + FN = 4, lo
 
 **Entrenamiento contra prueba.** La prueba sale apenas mejor en exactitud (+4,7 puntos) y peor en sensibilidad (−8,3 puntos). No hay señal de sobreajuste, pero tampoco alcanza para afirmar que generaliza: con 6 casos, un solo caso mueve la exactitud 16,7 puntos, y la especificidad de 100 % sale de solo 2 pedidos legítimos. Además, la prueba tiene 67 % de fraude y el entrenamiento 43 %. Si un solo caso de prueba cambiara de lado, la exactitud quedaría entre 66,7 % y 100 %, y la sensibilidad se movería 25 puntos, porque hay solo 4 fraudes. El intervalo de Wilson al 95 % para la exactitud de prueba va de 44 % a 97 %, así que el 83,3 % no es un número firme. La estimación más prudente es la de LOO sobre 1–14, con exactitud 10/14 = 71,4 %, unos 7 puntos debajo de la medición sobre los mismos datos con los que se ajustó.
 
-**Qué tan ciega fue la prueba.** No fue del todo ciega. La ficha trae los 20 casos en una misma tabla y la IA leyó también las filas 15–20 antes de construir el agente. Los scripts que ajustaron pesos y compararon candidatos usaron solo 1–14, y después de medir la prueba no se cambió ningún parámetro. Pero eso no descarta una influencia por haberlas visto, y el commit de los parámetros quedó registrado después de la primera medición, así que el historial tampoco prueba el orden.
+**Qué tan ciega fue la prueba.** No fue del todo ciega. La ficha trae los 20 casos en una misma tabla y la IA leyó también las filas 15–20 antes de construir el agente. Los scripts que ajustaron pesos y compararon candidatos usaron solo 1–14, y después de medir la prueba no se cambió ningún parámetro. Pero eso no descarta una influencia por haberlas visto, y el commit de los parámetros quedó registrado después de la primera medición, así que el historial tampoco prueba el orden. Por eso la cifra de prueba se informa como lo observado en esos 6 casos, y no como una estimación limpia de rendimiento futuro: para eso harían falta casos nuevos.
+
+**¿Se habría rechazado el árbol sin ver la prueba?** Medido después y solo con 1–14, el árbol de dos cortes da en LOO VP = 4, FN = 2, FP = 2, VN = 6 y 699 USD, contra VP = 5, FN = 1, FP = 3, VN = 5 y 668 USD del agente, con la misma exactitud (71,4 %). Esa ventaja es de un falso negativo y 31 USD: favorece al agente, pero no alcanza para decir que el árbol se habría rechazado igual.
 
 ## 4. El error más caro
 
@@ -111,6 +113,8 @@ VP: 15, 17, 20. FN: 18. VN: 16, 19. Cierre: 3 + 1 + 0 + 2 = 6, y VP + FN = 4, lo
 | Prueba (informado, no usado para decidir) | FN = 3, FP = 0, 1162 USD | FN = 1, FP = 0, 177 USD |
 
 Hay un costo real: en entrenamiento la regla baja un falso negativo solo en LOO, suma falsos positivos y no ahorra plata. La mantuve porque el umbral sale de las consecuencias declaradas y no de ajustarlo a estos casos. Esos 22 USD de diferencia en LOO no alcanzan para descartarla, y la mejora grande aparece solo en la prueba, que con 6 casos es poca evidencia.
+
+**De dónde salen el 70 % y el 30 %.** Son supuestos míos, no datos de la ficha: un margen de 30 % sobre el monto y, por lo tanto, un costo de mercadería de 70 %. Si la tienda tiene otro margen, se cambian esos valores en el código y la regla recalcula sola; lo que sigue muestra cuánto cambia la decisión.
 
 **Sensibilidad a los supuestos** (solo sobre 1–14, sin usar para elegir). Con margen de 10–20 % el agente frena más (FN = 0, FP = 2 a 4); con 30–40 %, FN = 1 y FP = 1 o 2; con 50 %, FN = 1 y FP = 0. La decisión depende bastante de estos supuestos, así que la tienda debería reemplazarlos por su margen real antes de usarlo.
 
@@ -155,8 +159,10 @@ El agente supera a las dos bases en exactitud: en prueba, por 50 puntos a Siempr
 | 4 | Pasar de umbral 0,50 a costo esperado. | La regla de costo esperado, porque responde a las consecuencias. | Bajar el margen supuesto a 20 %, que en 1–14 elimina el FN: sería acomodar un supuesto a los datos. Tampoco se tocó nada por el caso 18. |
 | 5 | Redactar este README con los resultados. | La redacción, incluidas las partes desfavorables (Siempre SÍ más barato en prueba, regla de costos sin ahorro en entrenamiento). | Afirmar que la prueba fue totalmente ciega, porque no sería cierto. |
 
+**Qué escribió la IA y qué hice yo.** Claude (la IA) escribió el código, hizo las mediciones y redactó todo este README. Mi parte es elegir la consigna y la pista, pedir los cambios, revisar el resultado antes de la mesa y defenderlo sin IA.
+
 **Corridas contra el evaluador**
 
 | Corrida | Nota | Agujero que encontró | Qué cambiamos |
 |---|---|---|---|
-| 1 | Sin nota todavía: esta es la primera corrida. | Sin datos todavía. | Sin cambios todavía. |
+| 1 | 10/10, sin topes, habilitado para la mesa | Principal: si no hubieras visto las filas 15–20 antes de elegir el modelo, ¿habrías rechazado el árbol? ¿Qué pasa con tu cifra de prueba si la elección se hizo mirándolas? Otros: ¿de dónde salen el 70 % y el 30 %, y qué pasa si el margen real es otro? ¿Qué parte escribió la IA y cuál revisaste vos? | Medí el árbol en LOO solo con 1–14 y lo respondí en la sección 3; aclaré el origen de los costos en la sección 4 y quién hizo qué en esta sección. No cambió el agente ni sus números. No hubo otra corrida después de estos cambios. |
