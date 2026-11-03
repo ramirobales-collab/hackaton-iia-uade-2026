@@ -3,7 +3,7 @@
 **Integrantes:** Ramiro Bales (legajo 1235871)
 **IA declarada:** Claude
 **Pista:** Agente
-**Publicación en LinkedIn:** <pendiente: link>
+**Publicación en LinkedIn:** se publica después de validar; todavía no hay link.
 
 ---
 
@@ -149,7 +149,7 @@ El agente supera a las dos bases en exactitud: en prueba, por 50 puntos a Siempr
 
 | # | Qué le pedimos | Qué aceptamos | Qué rechazamos y por qué |
 |---|---|---|---|
-| 1 | Que leyera bases, ficha, forks de otros grupos, apuntes y transcripciones, y que hiciera el trabajo completo en la pista Agente. Delegué la construcción: mi parte es revisarlo y defenderlo. | La ficha M03 por dominio (Comercio Electrónico, IA Claude), los temas de cátedra (PEAS, objetivo contra métrica, checklist) y los tipos de agujero que el bot marcó a otros grupos. | Mirar la solución del fork de otro grupo con la misma ficha M03: las bases prohíben copiar entre grupos. De los demás forks no se tomó código. |
+| 1 | Que leyera bases, ficha, forks de otros grupos, apuntes y transcripciones, y que hiciera el trabajo completo en la pista Agente. Delegué la construcción: mi parte es revisarlo y defenderlo. | La ficha M03 por dominio (Comercio Electrónico, IA Claude), los temas de cátedra (PEAS, objetivo contra métrica, checklist) y los tipos de agujero que el bot marcó a otros grupos. | Copiar soluciones de otros grupos, que las bases prohíben. El fork de otro grupo con la misma ficha M03 se salteó al construir; después de fijar y medir el sistema pedí leer todos los README, incluido ese. No se tomó nada de su solución ni se cambió el agente por eso. |
 | 2 | Detectar variables no disponibles al decidir. | Descartar el contracargo. | Usarlo aunque da 100 %: se conoce después del despacho y activa el tope de información no disponible. |
 | 3 | Elegir cómo estimar P con los casos 1–14. | Logística con distancia y antigüedad, por menor costo en LOO. | Sumar el monto a P (730 contra 668 USD en LOO). Un árbol de dos cortes (distancia ≥ 455 y antigüedad < 357,5), revisado a mano, acierta 14/14: lo rechazamos como memorización, y la IA además vio a mano que falla en los casos de prueba 15, 18 y 20, así que este rechazo no fue ciego. |
 | 4 | Pasar de umbral 0,50 a costo esperado. | La regla de costo esperado, porque responde a las consecuencias. | Bajar el margen supuesto a 20 %, que en 1–14 elimina el FN: sería acomodar un supuesto a los datos. Tampoco se tocó nada por el caso 18. |
@@ -159,4 +159,4 @@ El agente supera a las dos bases en exactitud: en prueba, por 50 puntos a Siempr
 
 | Corrida | Nota | Agujero que encontró | Qué cambiamos |
 |---|---|---|---|
-| 1 | <pendiente> | <pendiente> | <pendiente> |
+| 1 | Sin nota todavía: esta es la primera corrida. | Sin datos todavía. | Sin cambios todavía. |
