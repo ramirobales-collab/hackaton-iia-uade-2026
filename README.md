@@ -3,7 +3,7 @@
 **Integrantes:** Ramiro Bales (legajo 1235871)
 **IA declarada:** Claude
 **Pista:** Agente
-**Publicación en LinkedIn:** se publica después de validar; todavía no hay link.
+**Publicación en LinkedIn:** https://www.linkedin.com/feed/update/urn:li:activity:7523400052447457280/
 
 ---
 
