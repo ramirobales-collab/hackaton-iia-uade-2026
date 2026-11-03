@@ -133,13 +133,13 @@ El agente supera a las dos bases en exactitud: en prueba, por 50 puntos a Siempr
 | ¿Qué datos? | Los 20 casos inventados de la ficha, con división 14/6 sin cambios. Usa 3 de las 4 variables y descarta el contracargo. |
 | ¿Qué métrica? | Costo en USD como principal, con sensibilidad y especificidad. Exactitud y precisión se informan como complemento. |
 | ¿Comparado contra qué? | Siempre NO, Siempre SÍ y el umbral 0,50. |
-| ¿Quién lo midió? | Yo, con un script escrito por la IA y un recuento caso por caso contra la tabla. No es una medición independiente: el mismo equipo construyó, midió y quiere la nota, y los costos son supuestos propios. El control externo son los casos propios de la mesa. |
+| ¿Quién lo midió? | La IA (Claude), por encargo mío, con su propio script y un recuento caso por caso contra la tabla. No es una medición independiente: quien construyó también midió, yo quiero la nota, y los costos son supuestos propios. El control externo son los casos propios de la mesa. |
 
 ## 6. Riesgo: el camino completo
 
 - **Datos:** 20 pedidos inventados con 50 % de fraude. En una tienda real el fraude es mucho menos frecuente, y no aparecen patrones como una cuenta vieja robada que envía cerca.
 - **Modelo:** aprende que «cuenta nueva + envío lejos» es sospechoso, lo cual es una correlación y no una causa.
-- **Decisión:** frena al cliente nuevo que manda un regalo o se muda a otra provincia. Con un fraude de 2 % (ejemplo ilustrativo, no es dato de la ficha) y las tasas de entrenamiento (sensibilidad 83,3 %, especificidad 75 %), la precisión caería a 6,3 %: unos 94 de cada 100 pedidos frenados serían legítimos.
+- **Decisión:** frena al cliente nuevo que manda un regalo o se muda a otra provincia. Con un fraude de 2 % (ejemplo ilustrativo, no es dato de la ficha) y las tasas de entrenamiento (sensibilidad 83,3 %, especificidad 75 %), la precisión caería a 6,4 %: unos 94 de cada 100 pedidos frenados serían legítimos.
 - **Consecuencia:** la tienda pierde ventas y castiga sistemáticamente a clientes nuevos y a los que viven lejos de su domicilio de facturación. Además, quien comete fraude puede adaptarse enviando más cerca, como en el caso 18.
 - **Mitigación:** que SÍ signifique «frenar y revisar», con una persona que libere el pedido antes de cancelar la venta; medir los falsos positivos en producción y recalibrar con la tasa real de fraude.
 
